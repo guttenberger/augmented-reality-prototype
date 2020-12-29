@@ -10,12 +10,26 @@
   <script>
     window.onload = () => {
 
-      let position = (localStorage.getItem('position') || [])[0];
+      let positions = JSON.parse(localStorage.getItem('positions'));
 
-      if (position) {
-        document.querySelector('a-text').setAttribute('gps-entity-place', `latitude: ${position.lat}; longitude: ${position.lng};`);
+      if (positions) {
 
-        
+        var markers = positions.map(position => {
+          var marker = document.createElement('a-text');
+          marker.setAttribute('value', "X");
+          marker.setAttribute('look-at', "[gps-camera]");
+          marker.setAttribute('scale', "5 5 5");
+          marker.setAttribute('gps-entity-place', `latitude: ${position.lat}; longitude: ${position.lng};`);
+          return marker;
+        });
+
+        for (let marker of markers) {
+          console.log(marker);
+          document.querySelector('a-scene').appendChild(marker);
+        }
+
+        // document.querySelector('a-text').setAttribute('gps-entity-place', `latitude: ${position.lat}; longitude: ${position.lng};`);
+
       }
 
 
