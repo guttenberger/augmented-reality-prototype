@@ -3,3 +3,5 @@ Build Docker Image:
 
 Run Docker Image:
     - docker run --rm -p 3000:80 geoar
+    
+[Open Project](./www/index.html)
