@@ -3,7 +3,7 @@
 ## Description
 
 Mark specific positions on the map and see them in augmented reality.
-Postions will be saved on client side and will not be shared with anyone.
+Postions will be saved on client side and not be shared with anyone.
 This project was done for a university course.
 
 ## Live Demo
