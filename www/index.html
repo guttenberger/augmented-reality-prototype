@@ -1,35 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
-    <style>
-        .nav-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1ch;
-            height: 100vh;
-            width: 100%;
-        }
-    </style>
+  <link rel="stylesheet" href="/theme.css">
+
+  <style>
+    .content-wrapper {
+      display: flex;
+      flex:100% 1 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 90vh;
+    }
+
+    .logo {
+      height: 40vh;
+      width: 40vh;
+      margin: 20px;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 1ch;
+      max-width: 40vh;
+    }
+
+  </style>
 
 </head>
 
 <body>
 
-    <div class="nav-wrapper">
-        <button onclick="location.href='./map/index.html'" type="button">
-            Select Positions
+    <div class="content-wrapper">
+      <h1>Positions Markierer</h1>
+      <img class="logo" alt="logo" src="/assets/logo.svg">
+      <div class="action-buttons">
+        <button class="title" onclick="location.href='./map/index.html'" type="button">
+          Markierungen setzen
         </button>
-        <button onclick="location.href='./webcam/index.html'" type="button">
-            Open Webcam
+        <button class="title" onclick="location.href='./webcam/index.html'" type="button">
+          Kamera öffnen
         </button>
+      </div>
+    </div>
+    
+    <div class="subtitle">
+      Icons made by
+      <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from
+      <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
     </div>
 
 </body>
+
 </html>

@@ -16,15 +16,14 @@ function initMap() {
   function onMapClick(e) {
     var markerId = JSON.stringify(e.latlng);
 
-    L.marker(e.latlng)
+    var marker = L.marker(e.latlng)
       .bindPopup(
         `<p> You clicked the map at ${e.latlng.toString()} </p>`
       ).openPopup()
       .addTo(mymap);
 
     saveLatLng(e.latlng);
-    
-    console.log(localStorage.getItem("position"))
+    markers.push(marker);
   }
 
   mymap.on('click', onMapClick);
@@ -32,8 +31,6 @@ function initMap() {
 
 function initMarkers() {
   let positions = getAllLatLng();
-
-  console.log(positions);
 
   for (let { lat, lng } of positions) {
     var marker = L.marker([lat, lng], { title: "Markierte Stelle" })
@@ -45,7 +42,7 @@ function initMarkers() {
 
 function removeAllMarkers() {
 
-  for(let marker of markers) {
+  for (let marker of markers) {
     mymap.removeLayer(marker);
   }
 
