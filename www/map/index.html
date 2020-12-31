@@ -31,18 +31,28 @@
       height: 80%;
       width: 80%;
     }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      flex: 100 0 1;
+      width: 30%;
+      gap: 2ch;
+    }
   </style>
 </head>
 
 <body>
   <div class="wrapper">
     <div id="mapid"></div>
-    <button onclick="removeAllMarkers()">Alle Markierungen entfernen</button>
-    <button onclick="location.href='../webcam/index.html'" type="button">
-      Kamera öffnen
-    </button>
-  </div>
-  <script type="text/javascript" src="./script.js" ></script>
+    <div class="action-buttons">
+      <button class="title" onclick="mymap.removeAllMarkers()">Alle Markierungen entfernen</button>
+      <button class="title" onclick="location.href='../webcam/index.html'" type="button">
+        Kamera öffnen
+      </button>
+    </div>
+</div>
+<script type="text/javascript" src="./script.js"></script>
 </body>
 
 </html>

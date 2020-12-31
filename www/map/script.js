@@ -1,77 +1,80 @@
-var mymap = L.map('mapid').setView([52.520008, 13.404954], 10);
-var markers = [];
+class App {
+  static main() {
+    mymap = new MapCreator();
+    mymap.init();
+  }
+}
 
-function initMap() {
+class LatLngRepository {
+  save(latlng) {
+    let list = this.getAll();
 
-  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-      'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1
-  }).addTo(mymap);
+    list.push(latlng);
 
-  var popup = L.popup();
+    localStorage.setItem('positions', JSON.stringify(list));
+  }
 
-  function onMapClick(e) {
-    var markerId = JSON.stringify(e.latlng);
+  removeAll() {
+    localStorage.setItem('positions', "[]");
+  }
 
-    var marker = L.marker(e.latlng)
+  getAll() {
+    return JSON.parse(localStorage.getItem('positions') || "[]");
+  }
+}
+
+class MapCreator {
+  map = L.map('mapid').setView([52.520008, 13.404954], 10);
+  markers = [];
+  positionRepo = new LatLngRepository();
+
+  init() {
+    this.initMap();
+    this.initMarkers();
+  }
+
+  onMapClick(e) {
+    let marker = L.marker(e.latlng)
       .bindPopup(
         `<p> You clicked the map at ${e.latlng.toString()} </p>`
       ).openPopup()
-      .addTo(mymap);
+      .addTo(this.map);
 
-    saveLatLng(e.latlng);
-    markers.push(marker);
+    this.positionRepo.save(e.latlng);
+    this.markers.push(marker);
   }
 
-  mymap.on('click', onMapClick);
-}
+  initMap() {
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+      zoomOffset: -1
+    }).addTo(this.map);
 
-function initMarkers() {
-  let positions = getAllLatLng();
+    this.map.on('click', this.onMapClick.bind(this));
+  }
+  
+  initMarkers() {
+    let positions = this.positionRepo.getAll();
 
-  for (let { lat, lng } of positions) {
-    var marker = L.marker([lat, lng], { title: "Markierte Stelle" })
-      .addTo(mymap);
+    for (let { lat, lng } of positions) {
+      let marker = L.marker([lat, lng], { title: "Markierte Stelle" })
+        .addTo(this.map);
+  
+      this.markers.push(marker);
+    }
+  }
 
-    markers.push(marker);
+  removeAllMarkers() {
+    for (let marker of this.markers) {
+      this.map.removeLayer(marker);
+    }
+  
+    this.positionRepo.removeAll();
   }
 }
 
-function removeAllMarkers() {
-
-  for (let marker of markers) {
-    mymap.removeLayer(marker);
-  }
-
-  localStorage.clear();
-}
-
-
-function saveLatLng(latlng) {
-  var list = getAllLatLng();
-
-  list.push(latlng);
-
-  localStorage.setItem('positions', JSON.stringify(list));
-}
-
-function removeLatLng(latlng) {
-  var list = getAllLatLng();
-
-  var index = list.indexOf(latlng);
-  list.slice(index, 1);
-
-  localStorage.setItem('positions', JSON.stringify(list));
-}
-
-function getAllLatLng() {
-  return JSON.parse(localStorage.getItem('positions') || "[]");
-}
-
-(function main() {
-  initMap();
-  initMarkers();
-})();
+let mymap;
+App.main();
