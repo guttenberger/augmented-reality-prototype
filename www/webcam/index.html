@@ -29,14 +29,8 @@
           document.querySelector('a-scene').appendChild(marker);
         }
 
-        // document.querySelector('a-text').setAttribute('gps-entity-place', `latitude: ${position.lat}; longitude: ${position.lng};`);
-
       }
 
-
-      // navigator.geolocation.getCurrentPosition((position) => {
-      //   console.log(position)
-      // });
     }
   </script>
 </head>
@@ -44,7 +38,7 @@
 <body style="margin: 0; overflow: hidden;">
   <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; debugUIEnabled: false;">
     <a-text value="X" look-at="[gps-camera]" scale="5 5 5"></a-text>
-    <a-camera gps-camera rotation-reader> </a-camera>
+    <a-camera gps-camera alert rotation-reader> </a-camera>
   </a-scene>
 </body>
 
