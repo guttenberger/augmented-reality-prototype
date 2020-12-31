@@ -13,3 +13,8 @@
 body {
     background-color: #e9edf6;
   }
+
+input[type=text], input[type=button] {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
