@@ -24,13 +24,31 @@ class LatLngRepository {
 }
 
 class MapCreator {
-  map = L.map('mapid').setView([52.520008, 13.404954], 10);
+  map = L.map('mapid', { preferCanvas: true }).setView([52.520008, 13.404954], 10);
   markers = [];
   positionRepo = new LatLngRepository();
 
   init() {
     this.initMap();
     this.initMarkers();
+  }
+
+  zoomToCurrentPosition() {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by this browser.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.map.setView([position.coords.latitude, position.coords.longitude], 18);
+        L.circleMarker(
+          L.latLng(position.coords.latitude, position.coords.longitude), {
+          color: '#3388ff',
+          radius: 4
+        }).addTo(this.map);
+      }
+    );
   }
 
   onMapClick(e) {

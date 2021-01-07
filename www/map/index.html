@@ -38,7 +38,7 @@
       flex-direction: column;
       flex: 100 0 1;
       width: 30%;
-      gap: 2ch;
+      gap: 1ch;
       min-width: 230px;
     }
   </style>
@@ -48,6 +48,7 @@
   <div class="wrapper">
     <div id="mapid"></div>
     <div class="action-buttons">
+      <button class="title" onclick="mymap.zoomToCurrentPosition()">Aktuelle Position anzeigen</button>
       <button class="title" onclick="mymap.removeAllMarkers()">Alle Markierungen entfernen</button>
       <button class="title" onclick="location.href='../webcam/index.html'" type="button">
         Kamera öffnen
