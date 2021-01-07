@@ -27,6 +27,7 @@ class MapCreator {
   map = L.map('mapid', { preferCanvas: true }).setView([52.520008, 13.404954], 10);
   markers = [];
   positionRepo = new LatLngRepository();
+  positionMarker;
 
   init() {
     this.initMap();
@@ -48,7 +49,10 @@ class MapCreator {
   }
 
   addPositionMarker(latlng) {
-    L.circleMarker(latlng, {
+    if (this.positionMarker)
+      this.map.removeLayer(positionMarker);
+
+    this.positionMarker = L.circleMarker(latlng, {
       color: '#3388ff',
       radius: 4
     }).addTo(this.map);
