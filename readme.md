@@ -24,3 +24,7 @@ https://guttenberger.github.io/augmented-reality-prototype/www/index.html
     > docker run --rm -p 3000:80 ar-proto
 
 5. Open 'https://localhost:3000'
+
+## Warning
+
+Do not use encryption keys inside the ssl folder if you want to publish this app!
