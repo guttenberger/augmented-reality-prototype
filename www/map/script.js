@@ -50,7 +50,7 @@ class MapCreator {
 
   addPositionMarker(latlng) {
     if (this.positionMarker)
-      this.map.removeLayer(positionMarker);
+      this.map.removeLayer(this.positionMarker);
 
     this.positionMarker = L.circleMarker(latlng, {
       color: '#3388ff',
