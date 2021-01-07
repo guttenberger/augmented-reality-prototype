@@ -42,13 +42,16 @@ class MapCreator {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.map.setView([position.coords.latitude, position.coords.longitude], 18);
-        L.circleMarker(
-          L.latLng(position.coords.latitude, position.coords.longitude), {
-          color: '#3388ff',
-          radius: 4
-        }).addTo(this.map);
+        this.addPositionMarker(L.latLng(position.coords.latitude, position.coords.longitude));
       }
     );
+  }
+
+  addPositionMarker(latlng) {
+    L.circleMarker(latlng, {
+      color: '#3388ff',
+      radius: 4
+    }).addTo(this.map);
   }
 
   onMapClick(e) {
