@@ -1,10 +1,3 @@
-class App {
-  static main() {
-    mymap = new MapCreator();
-    mymap.init();
-  }
-}
-
 class LatLngRepository {
   save(latlng) {
     let list = this.getAll();
@@ -101,5 +94,7 @@ class MapCreator {
   }
 }
 
-let mymap;
-App.main();
+void function main() {
+  mymap = new MapCreator();
+  mymap.init();
+}();
